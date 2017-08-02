@@ -1,0 +1,46 @@
+Introduction
+============
+
+Fredrik Wikstrom released the source code to AmiSoundED 0.12 in 2009 because
+he did not have had time or motivation to work on this program for a while
+(partly because he has been busy with other more interesting projects like f.e.
+SRec) but also because they might be useful for someone developing programs for
+AmigaOS4.
+
+In 2017, I, Alexandre Balaban, started working on the sources to add features I
+missed. I wanted to share my modifications publically, so I contacted Fredrik
+and he kindly granted me the permission to put the source code on GitHub.
+
+He choosed to publish the sources using the GPLv2 licence. As such we are bound
+to respect this licence terms.
+
+
+Disclaimer
+==========
+
+Whereas the source code originally was trying to retain source level
+compatibility with AmigaOS 3, this is not my main concern. I own several
+machines running AmigaOS 4 and this is my main (and only) hobby operating
+system.
+
+
+Usage
+=====
+
+In order to build AmiSoundED itself, you need the latest AmigaOS SDK. Building
+using cross-compilation should be possible but is not guarantee to succeed. I
+am developing natively so do not contact me to know how to do it.
+
+To build AmiSoundED, you simply need to cd into the source directory and type
+make from a standard Shell. The executable resulting from the compilation will
+be put into the 'AmiSoundED' sub-directory. That directory is what is packed up
+for a binary distribution.
+
+Some plugins that were released separately like OGG, WavPack and MP3 are also
+included in that repository. They use their own Makefiles. To build them just
+cd into their directories and type make as above.
+
+F.e. to build the MP3 plugin:
+cd plugins/mp3
+make
+

@@ -1,0 +1,321 @@
+;
+; ***********************
+; ** Requesters & misc **
+; ***********************
+;
+MSG_ABOUT_REQ (//)
+%s version %ld.%ld\n\n\
+Copyright © 2008-2009\n\
+Fredrik Wikstrom\n\
+http://a500.org
+;
+MSG_ERROR (//)
+Error
+;
+MSG_OK_GAD (//)
+_Ok
+;
+MSG_CANCEL_GAD (//)
+_Cancel
+;
+MSG_UNTITLED (//)
+Untitled
+;
+MSG_NOMEM (//)
+Not enough memory!
+;
+MSG_OUTPUTFORMAT_LBL (//)
+Output format
+;
+MSG_RECORDSETTINGS_LBL (//)
+Record Settings
+;
+MSG_FREQUENCY_GAD (//)
+Frequency (Hz)
+;
+MSG_CHANNELS_GAD (//)
+Channels
+;
+MSG_MONO (//)
+Mono (1)
+;
+MSG_STEREO (//)
+Stereo (2)
+;
+MSG_SAMPLESIZE_GAD (//)
+Sample Size
+;
+MSG_RECORDLENGTH_GAD (//)
+Length (s)
+;
+MSG_NOAISS_REQ (//)
+AISS assign not found.\n\n\
+Download and install the latest version\n\
+from here: http://masonicons.de
+;
+MSG_APPLYTO_GAD (//)
+Apply to
+;
+MSG_SELECTION (//)
+Selection
+;
+MSG_WHOLESOUND (//)
+Whole sound
+;
+MSG_VIEWAREA (//)
+Viewed Area
+;
+MSG_START_GAD (//)
+Start (%)
+;
+MSG_END_GAD (//)
+End (%)
+;
+MSG_EFFECT_GAD (//)
+Effect
+;
+MSG_CUSTOM (//)
+Custom
+;
+MSG_FADEIN (//)
+Fade in
+;
+MSG_FADEOUT (//)
+Fade out
+;
+MSG_MAXIMISE (//)
+Maximise
+;
+MSG_ADJUSTVOLUME_LBL (//)
+Adjust Volume
+;
+MSG_LOADING (//)
+Loading...
+;
+MSG_SAVING (//)
+Saving...
+;
+MSG_LEFT_CHANNEL (//)
+Left
+;
+MSG_RIGHT_CHANNEL (//)
+Right
+;
+MSG_BOTH_CHANNELS (//)
+Both
+;
+MSG_RESAMPLE_LBL (//)
+Resample
+;
+MSG_SILENCE (//)
+Silence
+;
+MSG_UNSAVED_CHANGES_REQ (//)
+All unsaved changes to '%s' will be lost!
+;
+MSG_CONTINUE_GAD (//)
+Continue
+;
+MSG_NOCLIP_REQ (//)
+Clipboard does not contain sound data.
+;
+MSG_OLDAISS_REQ (//)
+AISS v%ld.%ld or newer required.\n\n\
+Download and install the latest version\n\
+from here: http://masonicons.de
+;
+MSG_RECORDTOFILE_GAD (//)
+Record to File
+;
+MSG_FILENAME_GAD (//)
+Filename
+;
+MSG_NOAHI_REQ (//)
+Could not open 'ahi.device'.
+;
+; *****************
+; ** Menu labels **
+; *****************
+;
+MSG_PROJECT_MENU (200//)
+Project
+;
+MSG_PROJECT_NEW (//)
+New
+;
+MSG_PROJECT_OPEN (//)
+Open...
+;
+MSG_PROJECT_SAVE (//)
+Save
+;
+MSG_PROJECT_SAVEAS (//)
+Save As...
+;
+MSG_PROJECT_ABOUT (//)
+About...
+;
+MSG_PROJECT_CLOSE (//)
+Close
+;
+MSG_EDIT_MENU (//)
+Edit
+;
+MSG_EDIT_UNDO (//)
+Undo
+;
+MSG_EDIT_REDO (//)
+Redo
+;
+MSG_EDIT_CUT (//)
+Cut
+;
+MSG_EDIT_COPY (//)
+Copy
+;
+MSG_EDIT_PASTE (//)
+Paste
+;
+MSG_EDIT_DELETE (//)
+Delete
+;
+MSG_PROJECT_RECORD (//)
+Record...
+;
+MSG_EDIT_VOLUME (//)
+Volume...
+;
+MSG_EDIT_RESAMPLE (//)
+Resample...
+;
+MSG_EFFECTS_MENU (//)
+Effects
+;
+MSG_EFFECTS_ECHO (//)
+Echo...
+;
+MSG_EDIT_MIX (//)
+Mix
+;
+MSG_EDIT_MIX_AVG (//)
+Average
+;
+MSG_EDIT_MIX_ADD (//)
+Add
+;
+MSG_EDIT_MIX_SUB (//)
+Subtract
+;
+MSG_PREFS_MENU (//)
+Preferences
+;
+MSG_PREFS_SETTINGS (//)
+Program Settings...
+;
+MSG_PREFS_CREATEICONS (//)
+Create Icons
+;
+MSG_PREFS_SAVESETTINGS (//)
+Save Settings
+;
+MSG_PROJECT_QUIT (//)
+Quit
+;
+MSG_LOADINGUSINGDT (//)
+Loading sound using datatypes...
+;
+; **********************************
+; ** Speedbar buttons (help text) **
+; **********************************
+;
+MSG_NEW_GAD (400//)
+New
+;
+MSG_OPEN_GAD (//)
+Open
+;
+MSG_SAVE_GAD (//)
+Save
+;
+MSG_SAVEAS_GAD (//)
+Save As
+;
+MSG_PLAYSOUND_GAD (//)
+Play
+;
+MSG_PLAYSELECTION_GAD (//)
+Play Selection
+;
+MSG_STOP_GAD (//)
+Stop
+;
+MSG_CUT_GAD (//)
+Cut
+;
+MSG_COPY_GAD (//)
+Copy
+;
+MSG_PASTE_GAD (//)
+Paste
+;
+MSG_DELETE_GAD (//)
+Delete
+;
+MSG_ZOOMSELECTION_GAD (//)
+Zoom to Selection
+;
+MSG_ZOOMIN2X_GAD (//)
+Zoom In (2x)
+;
+MSG_ZOOMOUT2X_GAD (//)
+Zoom Out (2x)
+;
+MSG_RECORD_GAD (//)
+Record
+;
+; **********************
+; ** Program Settings **
+; **********************
+;
+MSG_SETTINGS_WIN (//)
+Program Settings
+;
+MSG_USE_GAD (//)
+Use
+;
+MSG_RED_GAD (//)
+Red:
+;
+MSG_GREEN_GAD (//)
+Green:
+;
+MSG_BLUE_GAD (//)
+Blue:
+;
+MSG_COLORS_GAD (//)
+Colors
+;
+MSG_PEN (//)
+Pen
+;
+MSG_BKG1_PEN (//)
+Background gradient - Outer
+;
+MSG_BKG2_PEN (//)
+Background gradient - Inner
+;
+MSG_ZEROLINES_PEN (//)
+Zero point lines
+;
+MSG_WAVEFORM_PEN (//)
+Waveform
+;
+MSG_SELBKG1_PEN (//)
+Selection - Background gradient - Outer
+;
+MSG_SELBKG2_PEN (//)
+Selection - Background gradient - Inner
+;
+MSG_SELWAVEFORM_PEN (//)
+Selection - Waveform
+;

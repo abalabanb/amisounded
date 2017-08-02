@@ -1,0 +1,19 @@
+Short:        WavPack plugin for AmiSoundED
+Author:       Fredrik Wikstrom
+Uploader:     Fredrik Wikstrom <fredrik@a500.org>
+Type:         mus/edit
+Version:      0.1
+Architecture: ppc-amigaos
+
+Installation:
+
+Copy the WavPack file to AmiSoundED's Plugins drawer.
+
+Info:
+
+Uses libwavpack-4.41.0.
+
+Changes:
+
+0.1 (12-Nov-2008)
+ - First released version

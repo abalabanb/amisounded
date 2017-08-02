@@ -1,0 +1,20 @@
+Set AmiSoundED `GetEnv AppPaths/AmiSoundED`
+
+Copy AmiSoundED/AmiSoundED "$AmiSoundED"
+Copy AmiSoundED/amisounded.readme "$AmiSoundED"
+
+if exists "$AmiSoundED/Plugins"
+Copy AmiSoundED/Plugins/#? "$AmiSoundED/Plugins"
+else
+Makedir "$AmiSoundED/Plugins"
+Copy AmiSoundED/Plugins/#? "$AmiSoundED/Plugins"
+endif
+
+if exists "$AmiSoundED/Catalogs"
+Copy AmiSoundED/Catalogs/~(#?.#?) ALL "$AmiSoundED/Catalogs"
+else
+Makedir "$AmiSoundED/Catalogs"
+Copy AmiSoundED/Catalogs/~(#?.#?) ALL "$AmiSoundED/Catalogs"
+endif
+
+UnSet AmiSoundED

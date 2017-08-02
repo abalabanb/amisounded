@@ -1,0 +1,146 @@
+Short:        32-bit mono/stereo sound editor
+Author:       Fredrik Wikstrom
+Uploader:     Fredrik Wikstrom <fredrik@a500.org>
+Type:         mus/edit
+Version:      0.12
+Architecture: ppc-amigaos
+Replaces:     mus/edit/AmiSoundED
+Requires:     AISS
+
+Requirements:
+ - AISS v4.4 - http://masonicons.de
+
+Features:
+
+ - ReAction GUI
+ - Project window can be snapshotted ("snapshot" button in titlebar)
+ - Edit mono/stereo sounds in 8-, 16-, 24- or 32-bit
+ - Sound playback/recording through AHI's device interface
+ - Clipboard support (uses 8svx format for 8-bit data and otherwise aiff)
+ - Locale support
+ - Drag and drop support
+ - Record to disk (uncompressed aiff format)
+
+Loads:
+ - IFF-8SVX (.8svx, .iff)
+   - uncompressed
+   - Fibonacci delta compression
+   - Exponential delta compression
+ - IFF-AIFF / IFF-AIFC (.aiff)
+   - uncompressed
+ - Sun AU (.au)
+   - PCM, a-law, u-law, float
+ - RIFF-WAVE (.wav)
+   - PCM, MS/IMA ADPCM, GSM610, a-law, u-law, float, ...
+ - Datatypes (8-bit only)
+
+Saves:
+ - IFF-8SVX (.8svx, .iff)
+ - IFF-AIFF (.aiff)
+ - RIFF-WAVE (.wav)
+
+Installation:
+
+Just put the AmiSoundED drawer where you want it to be installed.
+
+Usage:
+
+Holding down left shift when starting a dragselect moves the left border of the
+current selection. The right shift key does the same for the right selection
+border. Which channel(s) is/are selected depends on the mouse y-position when
+dragging.
+
+Changes:
+
+0.12 (30-Jan-2009)
+ - Added a simple Installer script
+ - Added a message that is displayed while a sound is being loaded using the
+   datatypes system
+ - Improved application.library support
+
+0.11 (15-Dec-2008)
+ - Fixed a bug in the path handling code
+ - Updated Italian catalog
+
+0.10 (12-Dec-2008)
+ - Improved application.library support
+ - Simple preferences GUI (only allows changing of colours for now)
+
+0.9 (12-Nov-2008)
+ - Updated Italian catalog
+ - All sound data is now stored in swappable (MEMF_VIRTUAL) memory
+ - Only opens ahi.device as and when needed (recording, playback)
+ - Added a requester for when program has failed to open ahi.device (f.e. if
+   another program is using AHI's low-level interface AKA "Music Unit")
+
+0.8 (31-Oct-2008)
+ - Updated Spanish catalog
+ - Added an Italian translation by Samir Hawamdeh
+ - Fixed a bug when saving 32-bit RIFF-WAVE data
+ - Added ability to mix selection with data from the clipboard (average, add
+   and subtract)
+
+0.7 (10-Oct-2008)
+ - Updated French catalog
+ - Updated to use some of the new images in AISS v4.4
+ - Rewrote recording code (should work a little better now)
+ - Added sample length information to window title
+ - Implemented record to disk function (outputs as an AIFF file)
+ - Added a stack cookie to the executable
+
+0.6 (25-Sep-2008)
+ - Fixed corrupt filename in titlebar after loading (didn't affect loading by
+   drag and drop)
+ - Added code for registering opened documents with application.library
+ - Added code for warning about unsaved changes
+ - Implemented resampling (change sampling frequency / sample bit depth)
+
+0.5 (16-Sep-2008)
+ - Renamed to AmiSoundED to avoid confusion with an old amiga program
+ - Added maximise effect to volume editing
+ - Added progress bars for copying & pasting
+ - Fixed 24-bit recording (actually records in 32-bit and throws away the 8
+   least significant bits)
+ - Fixed bug in AHI playback code that caused stuttering sound especially when
+   used with small buffers (< 1s)
+ - Reduced playback buffers from 1s to 100ms (progress marker is now updated
+   10 times per second instead of only once per second)
+ - Added Spanish translation by Javier de las Rivas
+ - Improved application.library support (registers as an application and
+   supports "new document" and "open document" messages)
+ - Loads files passed as commandline arguments when run from CLI
+
+0.4 (7-Sep-2008)
+ - Implemented progressive waveform display when loading and recording
+ - Added support for drag and drop on program window to load a sound file
+   (or on it's icon if it's iconified)
+ - Will also load all files passed when started from WB (f.e. by drag and drop
+   onto icon in AmiDock or by using SoundED as the file's default tool)
+ - Improved the plugin system, old plugins will not work any more and will have
+   to be updated (they won't cause the program to crash though, they just won't
+   be used by the program)
+ - Implemented progress bars for loading and saving
+ - Fixed crash when writing higher bytes-per-sample data into a sound (f.e.
+   copying 32-bit data and pasting it into a 16-bit sound)
+ - Simple volume effects are now possible (volume increase/decrease as well as
+   linear fade in/fade out)
+ - Included a French translation by Alexandre Balaban
+
+0.3 (3-Sep-2008)
+ - Implemented a progress indicator for playback (including workaround for
+   drag and dropping on WB)
+ - Now uses external plugins for load/save stored in PROGDIR:Plugins
+ - Added IFF-8SVX load/save support
+ - Added RIFF-WAVE load/save support
+ - Fixed crash on iconifying when in playback mode
+
+0.2 (30-Aug-2008)
+ - Implemented recording (recorded several minutes of audio from mic-in on my
+   microA1, worked perfectly)
+ - Optimised rendering for very large sound files
+ - Fixed a bug when pasting stereo aiff data into an empty project
+ - Added error message on startup if AISS isn't installed
+ - Doubled size of load/save and copy/paste buffers (512 frames -> 1024 frames)
+
+0.1 (29-Aug-2008)
+ - First released version

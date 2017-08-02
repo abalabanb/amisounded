@@ -1,0 +1,5 @@
+Set AmiSoundED `GetEnv AppPaths/AmiSoundED`
+
+Copy MP3 "$AmiSoundED/Plugins"
+
+UnSet AmiSoundED

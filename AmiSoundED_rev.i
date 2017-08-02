@@ -1,0 +1,18 @@
+VERSION		EQU	0
+REVISION	EQU	12
+
+DATE	MACRO
+		dc.b '30.1.2009'
+		ENDM
+
+VERS	MACRO
+		dc.b 'AmiSoundED 0.12'
+		ENDM
+
+VSTRING	MACRO
+		dc.b 'AmiSoundED 0.12 (30.1.2009)',13,10,0
+		ENDM
+
+VERSTAG	MACRO
+		dc.b 0,'$VER: AmiSoundED 0.12 (30.1.2009)',0
+		ENDM

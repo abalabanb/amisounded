@@ -1,0 +1,21 @@
+Short:        OGG plugin for SoundED
+Author:       Fredrik Wikstrom
+Uploader:     Fredrik Wikstrom <fredrik@a500.org>
+Type:         mus/edit
+Version:      0.1
+Architecture: ppc-amigaos
+
+Installation:
+
+Copy the OGG file to SoundED's Plugins drawer.
+
+Info:
+
+Has read and write support.
+
+Plugin source code is included and can be compiled with "make".
+
+Changes:
+
+0.1 (9-Sep-2008)
+ - First released version

@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,7 +61,7 @@ struct Record2File *StartRecord2File (const char *filename, uint32 frequency,
     uint32 num_channels, uint32 sample_size)
 {
     struct Record2File *rec;
-    rec = AllocMem(sizeof(*rec), MEMF_PRIVATE);
+    rec = AllocVecTags(sizeof(*rec), AVT_Type, MEMF_PRIVATE, TAG_END);
     if (rec) {
         rec->Filename = filename;
         rec->File = Open(filename, MODE_NEWFILE);
@@ -138,9 +139,9 @@ void StopRecord2File (struct Record2File *rec, BOOL delete_file) {
             }
             Close(rec->File);
             if (delete_file) {
-                DeleteFile(rec->Filename);
+                Delete(rec->Filename);
             }
         }
-        FreeMem(rec, sizeof(*rec));
+        FreeVec(rec);
     }
 }

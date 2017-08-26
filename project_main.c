@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -236,7 +237,7 @@ void PerformAction (Project *project, uint32 action) {
                 SNDM_ZOOM, NULL, SOUND_ZOOMOUT2X);
             break;
 
-        case ACTION_ICONIFY:
+        case ACTION_DOICONIFY:
             RA_Iconify(project->Window);
             project->IWindow = NULL;
             GetAttr(WINDOW_SigMask, project->Window, &project->Signals[SIGNAL_WINDOW]);

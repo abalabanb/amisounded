@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -119,7 +120,7 @@ void AdjustVolume (Project *project) {
     dbug(("length: %ld\n", length));
     frame_size = num_channels << 2;
     bufsiz = buflen * frame_size;
-    buffer = AllocVec(bufsiz, MEMF_PRIVATE);
+    buffer = AllocVecTags(bufsiz, AVT_Type, MEMF_PRIVATE, TAG_END);
     if (!buffer) {
         dbug(("no memory\n"));
         goto out;

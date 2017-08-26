@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -150,8 +151,8 @@ void RecordSound (Project *project) {
     io2 = project->AHIio2;
     join = NULL;
 
-    buf = AllocVec(buffer_size, MEMF_SHARED);
-    buf2 = AllocVec(buffer_size, MEMF_SHARED);
+    buf = AllocVecTags(buffer_size, AVT_Type, MEMF_SHARED, TAG_END);
+    buf2 = AllocVecTags(buffer_size, AVT_Type, MEMF_SHARED, TAG_END);
     if (!buf || !buf2) {
         dbug(("failed to allocate buffers (size = %ld)\n", buffer_size));
         goto out;

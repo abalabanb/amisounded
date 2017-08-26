@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +26,8 @@
 #include <proto/iffparse.h>
 #include <stdlib.h>
 #include "debug.h"
+
+#include <dos/obsolete.h>
 
 extern struct SoundEDIFace ISoundED;
 struct PluginData PluginData;
@@ -70,7 +73,7 @@ void LoadPlugins (struct List *list) {
         int32 more;
         BPTR seglist;
 
-        buffer = AllocVec(1024, MEMF_SHARED);
+        buffer = AllocVecTags(1024, AVT_Type, MEMF_SHARED, TAG_END);
         dir = Lock("PROGDIR:Plugins", ACCESS_READ);
         eac = AllocDosObject(DOS_EXALLCONTROL, NULL);
 
@@ -117,8 +120,8 @@ void LoadPlugins (struct List *list) {
             plugin = (APTR)GetSucc((APTR)plugin);
         }
 
-        output_plugins = AllocVec((num_savers+1) << 2, MEMF_SHARED);
-        output_formats = AllocVec((num_savers+1) << 2, MEMF_SHARED);
+        output_plugins = AllocVecTags((num_savers+1) << 2, AVT_Type, MEMF_SHARED, TAG_END);
+        output_formats = AllocVecTags((num_savers+1) << 2, AVT_Type, MEMF_SHARED, TAG_END);
         if (!output_plugins || !output_formats) return;
         dst = (const void **)output_plugins;
         plugin = (APTR)GetHead(list);
@@ -209,7 +212,7 @@ struct LoadPlugin *FindLoader (struct List *list, BPTR file, const char *filenam
     uint32 test_size = TEST_SIZE(list);
     void *test = NULL;
     if (test_size > 0) {
-        test = AllocVec(test_size, MEMF_SHARED);
+        test = AllocVecTags(test_size, AVT_Type, MEMF_SHARED, TAG_END);
         if (!test) return NULL;
         TrashMem(test, test_size);
         Read(file, test, test_size);

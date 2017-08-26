@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +32,7 @@
 #define MIN(a,b) (((a)<(b))?(a):(b))
 
 BOOL OpenAHI (Project *project) {
-    project->AHImp = CreateMsgPort();
+    project->AHImp = AllocPort();
     project->AHIio = (APTR)CreateIORequest(project->AHImp, sizeof(struct AHIRequest));
     project->AHIio2 = (APTR)CreateIORequest(project->AHImp, sizeof(struct AHIRequest));
     if (!project->AHIio || !project->AHIio2) return FALSE;
@@ -53,7 +54,7 @@ void CloseAHI (Project *project) {
     DeleteIORequest((APTR)project->AHIio);
     DeleteIORequest((APTR)project->AHIio2);
     project->AHIio = project->AHIio2 = NULL;
-    DeleteMsgPort(project->AHImp);
+    FreePort(project->AHImp);
     project->AHImp = NULL;
 }
 
@@ -143,9 +144,9 @@ void PlaySound (Project *project, BOOL selection) {
     io2 = project->AHIio2;
     join = NULL;
 
-    buf = AllocVec(buffer_size, MEMF_SHARED);
+    buf = AllocVecTags(buffer_size, AVT_Type, MEMF_SHARED, TAG_END);
     if (buflen < length) {
-        buf2 = AllocVec(buffer_size, MEMF_SHARED);
+        buf2 = AllocVecTags(buffer_size, AVT_Type, MEMF_SHARED, TAG_END);
         if (!buf || !buf2) goto out;
     } else {
         buf2 = NULL;

@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -154,7 +155,9 @@ static const struct TagItem button2sbright[] = {
 
 Project *Project_Init (struct StartupMsg *startmsg) {
     Project *project;
-    project = AllocMem(sizeof(*project), MEMF_PRIVATE|MEMF_CLEAR);
+    project = AllocVecTags(sizeof(*project),    AVT_Type, MEMF_PRIVATE,
+                                                AVT_ClearWithValue, 0,
+                                                TAG_END);
     if (project) {
         struct StartupParams *params;
         project->PrID = startmsg->Msg.PrID;
@@ -183,7 +186,7 @@ Project *Project_Init (struct StartupMsg *startmsg) {
         project->Screen = params->Screen;
 
         project->SpeedButtons = MakeSpeedButtonList(project->Screen, buttonspecs);
-        project->AppPort = CreateMsgPort();
+        project->AppPort = AllocPort();
 
         project->Window = ExtWindowObject,
             WA_PubScreen,   project->Screen,
@@ -269,7 +272,7 @@ void Project_Free (Project *project) {
     if (project) {
         DisposeObject(project->Window);
         DisposeObject(project->Sound);
-        DeleteMsgPort(project->AppPort);
+        FreePort(project->AppPort);
         FreeSpeedButtonList(project->SpeedButtons);
 
         FreeVec(project->Filename);
@@ -279,7 +282,7 @@ void Project_Free (Project *project) {
         FreeAslRequest(project->OpenReq);
         FreeAslRequest(project->SaveReq);
 
-        FreeMem(project, sizeof(*project));
+        FreeVec(project);
     }
 }
 
@@ -306,7 +309,7 @@ void Project_HandleEvents (Project *project, uint32 sigmask) {
                     break;
 
                 case WMHI_ICONIFY:
-                    PerformAction(project, ACTION_ICONIFY);
+                    PerformAction(project, ACTION_DOICONIFY);
                     break;
 
                 case WMHI_UNICONIFY:
@@ -359,7 +362,7 @@ void Project_HandleEvents (Project *project, uint32 sigmask) {
                             break;
                             
                         case MSG_HIDE:
-                            PerformAction(project, ACTION_ICONIFY);
+                            PerformAction(project, ACTION_DOICONIFY);
                             break;
                             
                         case MSG_UNHIDE:

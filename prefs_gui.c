@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -80,7 +81,9 @@ static void SavePrefs (PrefsGUI *prefs, BOOL envarc);
 
 PrefsGUI *PrefsGUI_Init (struct StartupMsg *startmsg) {
     PrefsGUI *prefs;
-    prefs = AllocMem(sizeof(*prefs), MEMF_PRIVATE|MEMF_CLEAR);
+    prefs = AllocVecTags(sizeof(*prefs),    AVT_Type, MEMF_PRIVATE,
+                                            AVT_ClearWithValue, 0,
+                                            TAG_END);
     if (prefs) {
         struct StartupParams *params;
         const char *clicktab_labels[2];
@@ -120,7 +123,7 @@ PrefsGUI *PrefsGUI_Init (struct StartupMsg *startmsg) {
         prefs->ColorPen = ObtainPen(prefs->Screen->ViewPort.ColorMap, -1, 0, 0, 0, PENF_EXCLUSIVE);
         if (prefs->ColorPen == -1) goto out;
         
-        prefs->AppPort = CreateMsgPort();
+        prefs->AppPort = AllocPort();
         if (!prefs->AppPort) goto out;
         
         prefs->Window = ExtWindowObject,
@@ -255,13 +258,13 @@ out:
 void PrefsGUI_Free (PrefsGUI *prefs) {
     if (prefs) {
         DisposeObject(prefs->Window);
-        DeleteMsgPort(prefs->AppPort);
+        FreePort(prefs->AppPort);
         ReleasePen(prefs->Screen->ViewPort.ColorMap, prefs->ColorPen);
         if (prefs->Pens) {
             FreeListBrowserList(prefs->Pens);
             FreeList(prefs->Pens);
         }
-        FreeMem(prefs, sizeof(*prefs));
+        FreeVec(prefs);
     }
 }
 

@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -269,9 +270,9 @@ static BOOL OpenLibs () {
     ILayers = (APTR)GetInterface(LayersBase, "main", 1, NULL);
     if (!ILayers) return FALSE;
     ApplicationBase = OpenLibrary("application.library", 52);
-    IApplication = (APTR)GetInterface(ApplicationBase, "application", 1, NULL);
+    IApplication = (APTR)GetInterface(ApplicationBase, "application", 2, NULL);
     if (!IApplication) return FALSE;
-    IPrefsObjects = (APTR)GetInterface(ApplicationBase, "prefsobjects", 1, NULL);
+    IPrefsObjects = (APTR)GetInterface(ApplicationBase, "prefsobjects", 2, NULL);
     if (!IPrefsObjects) return FALSE;
     return TRUE;
 }
@@ -287,7 +288,9 @@ static void CloseLibs () {
 static GlobalData *InitGlobals () {
     GlobalData *gd = NULL;
 
-    gd = AllocMem(sizeof(*gd), MEMF_PRIVATE|MEMF_CLEAR);
+    gd = AllocVecTags(sizeof(*gd),  AVT_Type, MEMF_PRIVATE,
+                                    AVT_ClearWithValue, 0,
+                                    TAG_END);
     if (!gd) goto out;
 
     gd->Port = AllocPort();
@@ -326,14 +329,16 @@ static void FreeGlobals (GlobalData *gd) {
         FreeSemaphore(gd->Params.Lock);
         FreeList(gd->Projects);
         FreePort(gd->Port);
-        FreeMem(gd, sizeof(*gd));
+        FreeVec(gd);
     }
 }
 
 static BOOL NewProject (GlobalData *gd, char *filename) {
     extern int project_main ();
     struct ProjectNode *pr;
-    pr = AllocMem(sizeof(*pr), MEMF_PRIVATE|MEMF_CLEAR);
+    pr = AllocVecTags(sizeof(*pr),  AVT_Type, MEMF_PRIVATE,
+                                    AVT_ClearWithValue, 0,
+                                    TAG_END);
     if (pr) {
         struct StartupMsg *msg;
         msg = AllocMsg(sizeof(*msg), gd->Port);
@@ -367,7 +372,9 @@ static BOOL OpenPrefs (GlobalData *gd) {
     extern int prefs_main ();
     struct ProjectNode *pr;
     if (!(pr = gd->Prefs)) {
-        pr = AllocMem(sizeof(*pr), MEMF_PRIVATE|MEMF_CLEAR);
+        pr = AllocVecTags(sizeof(*pr),  AVT_Type, MEMF_PRIVATE,
+                                        AVT_ClearWithValue, 0,
+                                        TAG_END);
         if (pr) {
             struct StartupMsg *msg;
             msg = AllocMsg(sizeof(*msg), gd->Port);
@@ -417,7 +424,7 @@ static void FreeProject (struct ProjectNode *pr) {
         }
         if (pr->Node.mln_Pred && pr->Node.mln_Succ)
             Remove((struct Node *)pr);
-        FreeMem(pr, sizeof(*pr));
+        FreeVec(pr);
     }
 }
 

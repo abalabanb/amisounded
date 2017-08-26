@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -63,7 +64,10 @@ Class *SOUNDEDITOR_MakeClass () {
     Class *cl;
     cl = MakeClass("soundeditor.gadget", "gadgetclass", NULL, sizeof(InstanceData), 0);
     if (cl) {
-        GlobalData *gd = AllocMem(sizeof(*gd), MEMF_SHARED|MEMF_CLEAR);
+        GlobalData *gd = AllocVecTags(sizeof(*gd),  AVT_Type, MEMF_SHARED,
+                                                    AVT_ClearWithValue, 0,
+                                                    TAG_END
+);
         if (gd) {
             gd->Colors[COL_BKG1] = 0x000000;
             gd->Colors[COL_BKG2] = 0x5f5f5f;
@@ -106,7 +110,7 @@ Class *SOUNDEDITOR_MakeClass () {
 
 void SOUNDEDITOR_FreeClass (Class *cl) {
     if (cl) {
-        if (cl->cl_UserData) FreeMem((APTR)cl->cl_UserData, sizeof(GlobalData));
+        if (cl->cl_UserData) FreeVec((APTR)cl->cl_UserData);
         FreeClass(cl);
     }
 }

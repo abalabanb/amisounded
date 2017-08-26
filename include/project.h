@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -89,7 +90,7 @@ enum {
     ACTION_ZOOMOUT,
     ACTION_ZOOMSELECTION,
     ACTION_ABOUT,
-    ACTION_ICONIFY,
+    ACTION_DOICONIFY,
     ACTION_UNICONIFY,
     ACTION_CLEARSELECTION,
     ACTION_SETTINGS,

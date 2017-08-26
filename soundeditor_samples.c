@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,7 +60,9 @@ struct Sample *AllocSample(int32 num_channels, uint32 sample_size) {
     if (sample) {
         ClearMem(&sample->Link + 1, sizeof(*sample)-sizeof(sample->Link));
         for (chan = 0; chan < num_channels; chan++) {
-            sample->Data[chan] = AllocVec(SAMPLE_LENGTH * sample_size, MEMF_VIRTUAL|MEMF_SHARED);
+            sample->Data[chan] = AllocVecTags(SAMPLE_LENGTH * sample_size,  AVT_Type, MEMF_PRIVATE,
+                                                                            AVT_Lock, FALSE,
+                                                                            TAG_END);
             if (!sample->Data[chan]) {
                 FreeSample(sample);
                 return NULL;

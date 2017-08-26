@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -238,7 +239,7 @@ static int32 WriteSoundClip (Project *project, struct IFFHandle *iff, uint32 off
         uint32 orig_length = length;
 
         bufsiz = buflen;
-        buffer = AllocVec(bufsiz, MEMF_SHARED);
+        buffer = AllocVecTags(bufsiz, AVT_Type, MEMF_SHARED, TAG_END);
         if (!buffer) return ERROR_NO_FREE_STORE;
 
         error = PushChunk(iff, ID_8SVX, ID_FORM, IFFSIZE_UNKNOWN);
@@ -324,7 +325,7 @@ static int32 WriteSoundClip (Project *project, struct IFFHandle *iff, uint32 off
 
         frame_size = sample_size * write_channels;
         bufsiz = buflen * frame_size;
-        buffer = AllocVec(bufsiz, MEMF_SHARED);
+        buffer = AllocVecTags(bufsiz, AVT_Type, MEMF_SHARED, TAG_END);
         if (!buffer) return ERROR_NO_FREE_STORE;
 
         error = PushChunk(iff, ID_AIFF, ID_FORM, IFFSIZE_UNKNOWN);
@@ -456,7 +457,7 @@ static int32 ReadSoundClip (Project *project, struct IFFHandle *iff, uint32 offs
         uint32 orig_length;
 
         bufsiz = buflen;
-        buffer = AllocVec(bufsiz, MEMF_SHARED);
+        buffer = AllocVecTags(bufsiz, AVT_Type, MEMF_SHARED, TAG_END);
         if (!buffer) {
             error = ERROR_NO_FREE_STORE;
             goto out;
@@ -665,7 +666,7 @@ static int32 ReadSoundClip (Project *project, struct IFFHandle *iff, uint32 offs
                     }
                     frame_size = sample_size * num_channels;
                     bufsiz = buflen * frame_size;
-                    buffer = AllocVec(bufsiz, MEMF_SHARED);
+                    buffer = AllocVecTags(bufsiz, AVT_Type, MEMF_SHARED, TAG_END);
                     if (!buffer) {
                         error = ERROR_NO_FREE_STORE;
                         break;
@@ -782,9 +783,9 @@ static int32 MixSoundClip (Project *project, struct IFFHandle *iff, uint32 offse
         bufsamples = buflen;
 
         bufsiz = buflen;
-        buffer = AllocVec(bufsiz, MEMF_SHARED);
-        mix1 = AllocVec(bufsamples << 2, MEMF_PRIVATE);
-        mix2 = AllocVec(bufsamples << 2, MEMF_PRIVATE);
+        buffer = AllocVecTags(bufsiz, AVT_Type, MEMF_SHARED, TAG_END);
+        mix1 = AllocVecTags(bufsamples << 2, AVT_Type, MEMF_PRIVATE, TAG_END);
+        mix2 = AllocVecTags(bufsamples << 2, AVT_Type, MEMF_PRIVATE, TAG_END);
         if (!buffer || !mix1 || !mix2) {
             error = ERROR_NO_FREE_STORE;
             goto out;
@@ -1038,9 +1039,9 @@ static int32 MixSoundClip (Project *project, struct IFFHandle *iff, uint32 offse
                     done = TRUE;
                     frame_size = sample_size * num_channels;
                     bufsiz = buflen * frame_size;
-                    buffer = AllocVec(bufsiz, MEMF_SHARED);
-                    mix1 = AllocVec(bufsamples << 2, MEMF_PRIVATE);
-                    mix2 = AllocVec(bufsamples << 2, MEMF_PRIVATE);
+                    buffer = AllocVecTags(bufsiz, AVT_Type, MEMF_SHARED, TAG_END);
+                    mix1 = AllocVecTags(bufsamples << 2, AVT_Type, MEMF_PRIVATE, TAG_END);
+                    mix2 = AllocVecTags(bufsamples << 2, AVT_Type, MEMF_PRIVATE, TAG_END);
                     if (!buffer || !mix1 || !mix2) {
                         error = ERROR_NO_FREE_STORE;
                         break;

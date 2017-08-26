@@ -1,22 +1,3 @@
-/*
- * AmiSoundED - Sound Editor
- * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */
-
 #ifndef LOCALE_H
 #define LOCALE_H
 
@@ -31,6 +12,12 @@
 
 #ifndef EXEC_TYPES_H
 #include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_CODE
+#ifndef CATCOMP_BLOCK
+#define CATCOMP_ARRAY
+#endif
 #endif
 
 #ifdef CATCOMP_ARRAY
@@ -162,7 +149,7 @@
 
 #ifdef CATCOMP_STRINGS
 
-#define MSG_ABOUT_REQ_STR "%s version %ld.%ld\n\nCopyright © 2008-2009\nFredrik Wikstrom\nhttp://a500.org"
+#define MSG_ABOUT_REQ_STR "%s version %ld.%ld\n\nCopyright (c) 2008-2009 Fredrik Wikstrom\nCopyright (c) 2017 Alexandre Balaban\nhttp://github.com/abalabanb/amisounded.git\n\nAmiSoundED is under GPLv2 licence."
 #define MSG_ERROR_STR "Error"
 #define MSG_OK_GAD_STR "_Ok"
 #define MSG_CANCEL_GAD_STR "_Cancel"
@@ -181,8 +168,8 @@
 #define MSG_SELECTION_STR "Selection"
 #define MSG_WHOLESOUND_STR "Whole sound"
 #define MSG_VIEWAREA_STR "Viewed Area"
-#define MSG_START_GAD_STR "Start (%)"
-#define MSG_END_GAD_STR "End (%)"
+#define MSG_START_GAD_STR "Start (%%)"
+#define MSG_END_GAD_STR "End (%%)"
 #define MSG_EFFECT_GAD_STR "Effect"
 #define MSG_CUSTOM_STR "Custom"
 #define MSG_FADEIN_STR "Fade in"
@@ -389,7 +376,7 @@ STATIC CONST struct CatCompArrayType CatCompArray[] =
 
 STATIC CONST UBYTE CatCompBlock[] =
 {
-    "\x00\x00\x00\x00\x00\x4C"
+    "\x00\x00\x00\x00\x00\xB2"
     MSG_ABOUT_REQ_STR "\x00\x00"
     "\x00\x00\x00\x01\x00\x06"
     MSG_ERROR_STR "\x00"
@@ -427,10 +414,10 @@ STATIC CONST UBYTE CatCompBlock[] =
     MSG_WHOLESOUND_STR "\x00"
     "\x00\x00\x00\x12\x00\x0C"
     MSG_VIEWAREA_STR "\x00"
-    "\x00\x00\x00\x13\x00\x0A"
-    MSG_START_GAD_STR "\x00"
-    "\x00\x00\x00\x14\x00\x08"
-    MSG_END_GAD_STR "\x00"
+    "\x00\x00\x00\x13\x00\x0C"
+    MSG_START_GAD_STR "\x00\x00"
+    "\x00\x00\x00\x14\x00\x0A"
+    MSG_END_GAD_STR "\x00\x00"
     "\x00\x00\x00\x15\x00\x08"
     MSG_EFFECT_GAD_STR "\x00\x00"
     "\x00\x00\x00\x16\x00\x08"
@@ -594,71 +581,6 @@ STATIC CONST UBYTE CatCompBlock[] =
 
 /****************************************************************************/
 
-
-#ifdef CATCOMP_CODE
-
-#ifndef PROTO_LOCALE_H
-#define __NOLIBBASE__
-#define __NOGLOBALIFACE__
-#include <proto/locale.h>
-#endif
-
-struct LocaleInfo
-{
-#ifndef __amigaos4__
-    struct Library     *li_LocaleBase;
-#else
-    struct LocaleIFace *li_ILocale;
-#endif
-    struct Catalog     *li_Catalog;
-};
-
-
-CONST_STRPTR GetString(struct LocaleInfo *li, LONG stringNum);
-
-CONST_STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
-{
-#ifndef __amigaos4__
-    struct Library     *LocaleBase = li->li_LocaleBase;
-#else
-    struct LocaleIFace *ILocale    = li->li_ILocale;
-#endif
-    LONG         *l;
-    UWORD        *w;
-    CONST_STRPTR  builtIn;
-
-    l = (LONG *)CatCompBlock;
-
-    while (*l != stringNum)
-    {
-        w = (UWORD *)((ULONG)l + 4);
-        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
-    }
-    builtIn = (CONST_STRPTR)((ULONG)l + 6);
-
-#ifndef __amigaos4__
-    if (LocaleBase)
-    {
-        return GetCatalogStr(li->li_Catalog, stringNum, builtIn);
-    }
-#else
-    if (ILocale)
-    {
-#ifdef __USE_INLINE__
-        return GetCatalogStr(li->li_Catalog, stringNum, builtIn);
-#else
-        return ILocale->GetCatalogStr(li->li_Catalog, stringNum, builtIn);
-#endif
-    }
-#endif
-    return builtIn;
-}
-
-
-#endif /* CATCOMP_CODE */
-
-
-/****************************************************************************/
 
 
 #endif /* LOCALE_H */

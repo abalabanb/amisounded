@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +31,7 @@ char *Strdup (const char *src) {
     char *dst = NULL;
     if (src) {
         int32 size = strlen(src)+1;
-        dst = AllocVec(size, MEMF_SHARED);
+        dst = AllocVecTags(size, AVT_Type, MEMF_SHARED, TAG_END);
         if (dst) {
             CopyMem(src, dst, size);
         }
@@ -67,7 +68,7 @@ char *GetFullPath2 (BPTR dir, const char *file) {
     char *drawer;
     char *path = NULL;
     int32 size = 256;
-    while (drawer = AllocVec(size, MEMF_SHARED)) {
+    while (drawer = AllocVecTags(size, AVT_Type, MEMF_SHARED, TAG_END)) {
         if (DevNameFromLock(dir, drawer, size, DN_FULLPATH)) break;
         FreeVec(drawer);
         drawer = NULL;
@@ -85,7 +86,7 @@ char *MakePath (const char *drawer, const char *file) {
     char *path;
     int32 path_size;
     path_size = strlen(drawer) + strlen(file) + 8;
-    path = AllocVec(path_size, MEMF_SHARED);
+    path = AllocVecTags(path_size, AVT_Type, MEMF_SHARED, TAG_END);
     if (path) {
         strcpy(path, drawer);
         AddPart(path, file, path_size);

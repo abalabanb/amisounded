@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +28,9 @@
 
 struct ProgressBar *CreateProgressBar (Project *project, BOOL save) {
     struct ProgressBar *pb;
-    pb = AllocMem(sizeof(*pb), MEMF_PRIVATE|MEMF_CLEAR);
+    pb = AllocVecTags(sizeof(*pb),  AVT_Type, MEMF_PRIVATE,
+                                    AVT_ClearWithValue, 0,
+                                    TAG_END);
     if (pb) {
         struct Window *main_window = project->IWindow;
 
@@ -63,7 +66,7 @@ struct ProgressBar *CreateProgressBar (Project *project, BOOL save) {
 void DeleteProgressBar (struct ProgressBar *pb) {
     if (pb) {
         DisposeObject(pb->Window);
-        FreeMem(pb, sizeof(*pb));
+        FreeVec(pb);
     }
 }
 

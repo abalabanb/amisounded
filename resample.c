@@ -1,6 +1,7 @@
 /*
  * AmiSoundED - Sound Editor
  * Copyright (C) 2008-2009 Fredrik Wikstrom <fredrik@a500.org>
+ * Copyright (C) 2017 Alexandre Balaban <github@balaban.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -101,15 +102,15 @@ void Resample (Project *project) {
         goto out;
     }
     if (new_length == old_length) {
-        inbuffer = AllocVec(bufsiz*num_channels, MEMF_PRIVATE);
+        inbuffer = AllocVecTags(bufsiz*num_channels, AVT_Type, MEMF_PRIVATE, TAG_END);
         if (!inbuffer) {
             DisposeObject(new_sound);
             new_sound = NULL;
             goto out;
         }
     } else {
-        inbuffer = AllocVec(num_channels << 3, MEMF_PRIVATE);
-        outbuffer = AllocVec(bufsiz*num_channels, MEMF_PRIVATE);
+        inbuffer = AllocVecTags(num_channels << 3, AVT_Type, MEMF_PRIVATE, TAG_END);
+        outbuffer = AllocVecTags(bufsiz*num_channels, AVT_Type, MEMF_PRIVATE, TAG_END);
         if (!inbuffer || !outbuffer) {
             DisposeObject(new_sound);
             new_sound = NULL;

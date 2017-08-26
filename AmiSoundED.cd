@@ -1,3 +1,4 @@
+#version 2
 ;
 ; ***********************
 ; ** Requesters & misc **
@@ -278,7 +279,7 @@ Record
 ; ** Program Settings **
 ; **********************
 ;
-MSG_SETTINGS_WIN (//)
+MSG_SETTINGS_WIN (500//)
 Program Settings
 ;
 MSG_USE_GAD (//)

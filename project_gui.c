@@ -76,6 +76,7 @@ static const struct SpeedButtonSpec buttonspecs[] = {
     { ACTION_SAVEAS, 0, "tbimages:saveas", "tbimages:saveas_s", "tbimages:saveas_g" },
     { ACTION_PLAYSOUND, 0, "tbimages:stape_play", "tbimages:stape_play_s", "tbimages:stape_play_g" },
     { ACTION_PLAYSELECTION, 0, "tbimages:stape_playsel", "tbimages:stape_playsel_s", "tbimages:stape_playsel_g" },
+    { ACTION_LOOP, SBNA_Toggle, "tbimages:stape_loop", "tbimages:stape_loop_s", "tbimages:stape_loop_g" },
     { ACTION_STOP, 0, "tbimages:stape_stop", "tbimages:stape_stop_s", "tbimages:stape_stop_g" },
     { ACTION_RECORD, 0, "tbimages:stape_rec", "tbimages:stape_rec_s", "tbimages:stape_rec_g" },
     { ACTION_CUT, 0, "tbimages:cut", "tbimages:cut_s", "tbimages:cut_g" },
@@ -96,6 +97,7 @@ static struct HintInfo hintinfos[] = {
     { GID_SPEEDBAR, ACTION_SAVEAS, STR_ID(MSG_SAVEAS_GAD), 0 },
     { GID_SPEEDBAR, ACTION_PLAYSOUND, STR_ID(MSG_PLAYSOUND_GAD), 0 },
     { GID_SPEEDBAR, ACTION_PLAYSELECTION, STR_ID(MSG_PLAYSELECTION_GAD), 0 },
+    { GID_SPEEDBAR, ACTION_LOOP, STR_ID(MSG_LOOP_GAD), 0 },
     { GID_SPEEDBAR, ACTION_STOP, STR_ID(MSG_STOP_GAD), 0 },
     { GID_SPEEDBAR, ACTION_RECORD, STR_ID(MSG_RECORD_GAD), 0 },
     { GID_SPEEDBAR, ACTION_CUT, STR_ID(MSG_CUT_GAD), 0 },
@@ -469,6 +471,7 @@ void Project_UpdateGUI (Project *project) {
                 case ACTION_SAVE:
                 case ACTION_SAVEAS:
                 case ACTION_PLAYSOUND:
+                case ACTION_LOOP:
                     disabled = is_empty;
                     break;
                 case ACTION_PLAYSELECTION:

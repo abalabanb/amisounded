@@ -69,6 +69,8 @@ typedef struct {
 
     struct AHIRequest *AHIio, *AHIio2;
     struct MsgPort *AHImp;
+
+    BOOL LoopPlay;
 } Project;
 
 enum {
@@ -96,6 +98,7 @@ enum {
     ACTION_SETTINGS,
     ACTION_PLAYSOUND,
     ACTION_PLAYSELECTION,
+    ACTION_LOOP,
     ACTION_STOP,
     ACTION_TOGGLELEFTCHANNEL,
     ACTION_TOGGLERIGHTCHANNEL,

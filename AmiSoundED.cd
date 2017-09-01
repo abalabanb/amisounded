@@ -275,6 +275,9 @@ Zoom Out (2x)
 MSG_RECORD_GAD (//)
 Record
 ;
+MSG_LOOP_GAD (//)
+Loop
+;
 ; **********************
 ; ** Program Settings **
 ; **********************

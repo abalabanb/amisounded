@@ -126,20 +126,21 @@
 #define MSG_ZOOMIN2X_GAD 412
 #define MSG_ZOOMOUT2X_GAD 413
 #define MSG_RECORD_GAD 414
-#define MSG_SETTINGS_WIN 415
-#define MSG_USE_GAD 416
-#define MSG_RED_GAD 417
-#define MSG_GREEN_GAD 418
-#define MSG_BLUE_GAD 419
-#define MSG_COLORS_GAD 420
-#define MSG_PEN 421
-#define MSG_BKG1_PEN 422
-#define MSG_BKG2_PEN 423
-#define MSG_ZEROLINES_PEN 424
-#define MSG_WAVEFORM_PEN 425
-#define MSG_SELBKG1_PEN 426
-#define MSG_SELBKG2_PEN 427
-#define MSG_SELWAVEFORM_PEN 428
+#define MSG_LOOP_GAD 415
+#define MSG_SETTINGS_WIN 500
+#define MSG_USE_GAD 501
+#define MSG_RED_GAD 502
+#define MSG_GREEN_GAD 503
+#define MSG_BLUE_GAD 504
+#define MSG_COLORS_GAD 505
+#define MSG_PEN 506
+#define MSG_BKG1_PEN 507
+#define MSG_BKG2_PEN 508
+#define MSG_ZEROLINES_PEN 509
+#define MSG_WAVEFORM_PEN 510
+#define MSG_SELBKG1_PEN 511
+#define MSG_SELBKG2_PEN 512
+#define MSG_SELWAVEFORM_PEN 513
 
 #endif /* CATCOMP_NUMBERS */
 
@@ -234,6 +235,7 @@
 #define MSG_ZOOMIN2X_GAD_STR "Zoom In (2x)"
 #define MSG_ZOOMOUT2X_GAD_STR "Zoom Out (2x)"
 #define MSG_RECORD_GAD_STR "Record"
+#define MSG_LOOP_GAD_STR "Loop"
 #define MSG_SETTINGS_WIN_STR "Program Settings"
 #define MSG_USE_GAD_STR "Use"
 #define MSG_RED_GAD_STR "Red:"
@@ -350,6 +352,7 @@ STATIC CONST struct CatCompArrayType CatCompArray[] =
     {MSG_ZOOMIN2X_GAD,(CONST_STRPTR)MSG_ZOOMIN2X_GAD_STR},
     {MSG_ZOOMOUT2X_GAD,(CONST_STRPTR)MSG_ZOOMOUT2X_GAD_STR},
     {MSG_RECORD_GAD,(CONST_STRPTR)MSG_RECORD_GAD_STR},
+    {MSG_LOOP_GAD,(CONST_STRPTR)MSG_LOOP_GAD_STR},
     {MSG_SETTINGS_WIN,(CONST_STRPTR)MSG_SETTINGS_WIN_STR},
     {MSG_USE_GAD,(CONST_STRPTR)MSG_USE_GAD_STR},
     {MSG_RED_GAD,(CONST_STRPTR)MSG_RED_GAD_STR},
@@ -546,33 +549,35 @@ STATIC CONST UBYTE CatCompBlock[] =
     MSG_ZOOMOUT2X_GAD_STR "\x00"
     "\x00\x00\x01\x9E\x00\x08"
     MSG_RECORD_GAD_STR "\x00\x00"
-    "\x00\x00\x01\x9F\x00\x12"
+    "\x00\x00\x01\x9F\x00\x06"
+    MSG_LOOP_GAD_STR "\x00\x00"
+    "\x00\x00\x01\xF4\x00\x12"
     MSG_SETTINGS_WIN_STR "\x00\x00"
-    "\x00\x00\x01\xA0\x00\x04"
+    "\x00\x00\x01\xF5\x00\x04"
     MSG_USE_GAD_STR "\x00"
-    "\x00\x00\x01\xA1\x00\x06"
+    "\x00\x00\x01\xF6\x00\x06"
     MSG_RED_GAD_STR "\x00\x00"
-    "\x00\x00\x01\xA2\x00\x08"
+    "\x00\x00\x01\xF7\x00\x08"
     MSG_GREEN_GAD_STR "\x00\x00"
-    "\x00\x00\x01\xA3\x00\x06"
+    "\x00\x00\x01\xF8\x00\x06"
     MSG_BLUE_GAD_STR "\x00"
-    "\x00\x00\x01\xA4\x00\x08"
+    "\x00\x00\x01\xF9\x00\x08"
     MSG_COLORS_GAD_STR "\x00\x00"
-    "\x00\x00\x01\xA5\x00\x04"
+    "\x00\x00\x01\xFA\x00\x04"
     MSG_PEN_STR "\x00"
-    "\x00\x00\x01\xA6\x00\x1C"
+    "\x00\x00\x01\xFB\x00\x1C"
     MSG_BKG1_PEN_STR "\x00"
-    "\x00\x00\x01\xA7\x00\x1C"
+    "\x00\x00\x01\xFC\x00\x1C"
     MSG_BKG2_PEN_STR "\x00"
-    "\x00\x00\x01\xA8\x00\x12"
+    "\x00\x00\x01\xFD\x00\x12"
     MSG_ZEROLINES_PEN_STR "\x00\x00"
-    "\x00\x00\x01\xA9\x00\x0A"
+    "\x00\x00\x01\xFE\x00\x0A"
     MSG_WAVEFORM_PEN_STR "\x00\x00"
-    "\x00\x00\x01\xAA\x00\x28"
+    "\x00\x00\x01\xFF\x00\x28"
     MSG_SELBKG1_PEN_STR "\x00"
-    "\x00\x00\x01\xAB\x00\x28"
+    "\x00\x00\x02\x00\x00\x28"
     MSG_SELBKG2_PEN_STR "\x00"
-    "\x00\x00\x01\xAC\x00\x16"
+    "\x00\x00\x02\x01\x00\x16"
     MSG_SELWAVEFORM_PEN_STR "\x00\x00"
 };
 

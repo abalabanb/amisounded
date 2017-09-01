@@ -255,6 +255,10 @@ void PerformAction (Project *project, uint32 action) {
             PlaySound(project, TRUE);
             break;
 
+        case ACTION_LOOP:
+            project->LoopPlay = !project->LoopPlay;
+            break;
+
         case ACTION_CUT:
             CutSoundData(project);
             Project_UpdateGUI(project);

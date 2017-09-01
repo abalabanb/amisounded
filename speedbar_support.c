@@ -49,6 +49,7 @@ struct List *MakeSpeedButtonList (struct Screen *scr, const struct SpeedButtonSp
                 node = AllocSpeedButtonNode(spec->ButtonID,
                     SBNA_Image,     image,
                     SBNA_Highlight, SBH_IMAGE,
+                    SBNA_Toggle,    (spec->Flags == SBNA_Toggle),
                     TAG_END);
             else
                 node = NULL;

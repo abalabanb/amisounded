@@ -22,7 +22,7 @@
 
 struct SpeedButtonSpec {
     uint16 ButtonID;
-    uint16 Flags;
+    uint32 Flags;
     char *Normal;
     char *Selected;
     char *Disabled;
